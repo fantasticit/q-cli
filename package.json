@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "A cli tool to init project from github project template",
   "main": "index.js",
+  "author": "hyiron",
+  "repos": [
+    "create-react-app",
+    "create-electron-app"
+  ],
+  "license": "ISC",
   "bin": {
     "hy-cli": "./bin/index.js"
   },
@@ -15,12 +21,10 @@
     "type": "git",
     "url": "git+https://github.com/hyiron/hy-cli.git"
   },
-  "author": "hyiron <https://github.com/hyiron>",
-  "repos": ["create-react-app", "create-electron-app"],
-  "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
+    "download-git-repo": "^1.0.2",
     "inquirer": "^6.0.0",
     "ora": "^2.1.0"
   }
