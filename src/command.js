@@ -62,10 +62,10 @@ program
       log(`\n    ${cliName} · Generated "${projectName}".\n`)
       log('# ' + chalk.green(`Project initialization finished!`))
       log('# ================================\n')
-      log('To get started: ')
+      log('To get started: \n')
       log(chalk.yellow(`  cd ${projectName}`))
       log(chalk.yellow(`  npm install (or if using yarn: yarn)`))
-      log(chalk.yellow(`  npm run dev`))
+      log(chalk.yellow(`  npm run dev\n`))
       log(`${cliName} 's source code is in ${repository}\n\n`)
     } catch (err) {
       if (hasMkdir && projectName) {
