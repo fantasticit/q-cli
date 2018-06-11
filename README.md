@@ -1,6 +1,6 @@
 # hy-cli
 
-> A simple CLI for scaffolding project via other template project.
+> A simple CLI for scaffolding project via template.
 
 ## Install
 
