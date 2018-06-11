@@ -9,6 +9,7 @@
     "create-electron-app"
   ],
   "license": "ISC",
+  "private": true,
   "bin": {
     "hy-cli": "./bin/index.js"
   },
