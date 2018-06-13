@@ -22,7 +22,7 @@ program.version(version)
 // 初始化
 program
   .command('init')
-  .description('install github project to local')
+  .description('generated new project via other template')
   .action(async opts => {
     try {
       if (typeof opts !== 'string') {
