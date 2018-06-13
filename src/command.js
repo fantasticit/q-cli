@@ -8,7 +8,7 @@ const rm = require('rimraf')
 
 const log = console.log
 
-const { author, cliName, repository, repos, version } = require('./constant')
+const { author, cliName, repository, templates, version } = require('./constant')
 const download = require('./download')
 const mkdir = require('./mkdir')
 const question = require('./question')
@@ -41,7 +41,7 @@ program
           type: 'list',
           name: 'repo',
           message: 'Which repo do you want to install?',
-          choices: repos
+          choices: templates
         }
       ]
       const { repo } = await inquirer.prompt(questions)
