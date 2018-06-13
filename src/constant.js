@@ -6,7 +6,7 @@ const config = require(path.resolve(__dirname, '../package.json'))
 module.exports = {
   author: config.author,
   cliName: config.name,
-  repos: config.repos,
+  templates: config.templates,
   repository: config.repository.url,
   version: config.version
 }
