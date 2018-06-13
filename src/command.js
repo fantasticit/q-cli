@@ -66,7 +66,7 @@ program
       log(chalk.yellow(`  cd ${projectName}`))
       log(chalk.yellow(`  npm install (or if using yarn: yarn)`))
       log(chalk.yellow(`  npm run dev\n`))
-      log(`${cliName} 's source code is in ${repository}\n\n`)
+      log(`${cliName}'s source code is in ${repository}\n\n`)
     } catch (err) {
       if (hasMkdir && projectName) {
         // 删除新建的文件夹
@@ -83,6 +83,6 @@ program
   })
 
 // 监听错误
-process.on('unhandledRejection', reason => console.log(chalk.red(reason)))
+process.on('unhandledRejection', reason => log(chalk.red(reason)))
 
 program.parse(process.argv)
