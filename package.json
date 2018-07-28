@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "A cli tool to init project from github project template",
   "main": "index.js",
-  "author": "hyiron",
+  "author": "justemit",
   "templates": [
-    "create-react-app",
-    "create-electron-app"
+    "react-typescript-boilerplate",
+    "electron-react-boilerplate"
   ],
   "license": "ISC",
   "private": true,
@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hyiron/hy-cli.git"
+    "url": "git+https://github.com/justemit/hy-cli.git"
   },
   "dependencies": {
     "chalk": "^2.4.1",

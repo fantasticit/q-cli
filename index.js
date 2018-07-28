@@ -1,1 +1,1 @@
-require('./src/command.js')
+require('./src/index.js')

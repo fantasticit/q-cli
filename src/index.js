@@ -1,3 +1,4 @@
+const os = require('os')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const ora = require('ora')
@@ -8,10 +9,18 @@ const rm = require('rimraf')
 
 const log = console.log
 
-const { author, cliName, repository, templates, version } = require('./constant')
+const {
+  author,
+  cliName,
+  repository,
+  templates,
+  version
+} = require('./constant')
+
 const download = require('./download')
 const mkdir = require('./mkdir')
 const question = require('./question')
+const readFile = require('./readFile')
 
 let projectName = '' // 新建项目名称
 let hasMkdir = false // 是否已经新建文件夹
@@ -47,26 +56,59 @@ program
       const { repo } = await inquirer.prompt(questions)
 
       // github 模板 下载开始
-      let Spinner = ora('downloading template')
+      let Spinner = ora('downloading...')
       Spinner.start()
 
       // 根据 项目名 创建新文件夹
       let dir = path.resolve(process.cwd(), `./${projectName}/`)
 
+      // 下载模板文件
       await mkdir(dir)
       hasMkdir = true
       await download(`${author}/${repo}`, dir)
-
       // github 模板 下载完成
       Spinner.stop()
-      log(`\n    ${cliName} · Generated "${projectName}".\n`)
-      log('# ' + chalk.green(`Project initialization finished!`))
-      log('# ================================\n')
-      log('To get started: \n')
-      log(chalk.yellow(`  cd ${projectName}`))
-      log(chalk.yellow(`  npm install (or if using yarn: yarn)`))
-      log(chalk.yellow(`  npm run dev\n`))
-      log(`${cliName}'s source code is in ${repository}\n\n`)
+
+      // 修改 package.json
+      const packJSON = await readFile(`${dir}/package.json`)
+
+      delete packJSON['repository']
+      delete packJSON['keywords']
+
+      const keys = ['name', 'description', 'author']
+      const userInputs = await Promise.all(
+        keys.map(async key => {
+          const answer = await question(
+            `Please enter the ${key} for the project ${projectName}: `
+          )
+
+          return answer
+        })
+      )
+      const defaults = [projectName, '', os.userInfo().username]
+      keys.forEach((key, i) => {
+        if (!userInputs[i]) {
+          packageJSON[key] = userInputs[i]
+        } else {
+          packageJSON[key] = defaults[i]
+        }
+      })
+      // 覆盖写入新的 package.json
+      fs.writeFile(
+        `${dir}/package.json`,
+        JSON.stringify(packJSON, null, 2),
+        'utf8',
+        err => {
+          log(`\n    ${cliName} · Generated "${projectName}".\n`)
+          log('# ' + chalk.green(`Project initialization finished!`))
+          log('# ================================\n')
+          log('To get started: \n')
+          log(chalk.yellow(`  cd ${projectName}`))
+          log(chalk.yellow(`  npm install (or if using yarn: yarn)`))
+          log(chalk.yellow(`  npm run dev\n`))
+          log(`${cliName}'s source code is in ${repository}\n\n`)
+        }
+      )
     } catch (err) {
       if (hasMkdir && projectName) {
         // 删除新建的文件夹
