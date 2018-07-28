@@ -1,4 +1,5 @@
 const os = require('os')
+const fs = require('fs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const ora = require('ora')
