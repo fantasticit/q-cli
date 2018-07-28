@@ -70,25 +70,30 @@ program
       Spinner.stop()
 
       // 修改 package.json
-      const packJSON = await readFile(`${dir}/package.json`)
+      const packageJSON = await readFile(`${dir}/package.json`)
 
-      delete packJSON['repository']
-      delete packJSON['keywords']
+      delete packageJSON['bin']
+      delete packageJSON['repository']
+      delete packageJSON['keywords']
 
       const keys = ['name', 'description', 'author']
-      const userInputs = await Promise.all(
-        keys.map(async key => {
-          const answer = await question(
-            `Please enter the ${key} for the project ${projectName}: `
-          )
 
-          return answer
-        })
-      )
+      const userInputs = []
       const defaults = [projectName, '', os.userInfo().username]
+
+      for (let key of keys) {
+        const answer = await inquirer.prompt({
+          type: 'input',
+          name: key,
+          message: `Please enter the ${key} for the project ${projectName}: `
+        })
+
+        userInputs.push(answer)
+      }
+
       keys.forEach((key, i) => {
-        if (!userInputs[i]) {
-          packageJSON[key] = userInputs[i]
+        if (userInputs[i][key]) {
+          packageJSON[key] = userInputs[i][key]
         } else {
           packageJSON[key] = defaults[i]
         }
@@ -96,7 +101,7 @@ program
       // 覆盖写入新的 package.json
       fs.writeFile(
         `${dir}/package.json`,
-        JSON.stringify(packJSON, null, 2),
+        JSON.stringify(packageJSON, null, 2),
         'utf8',
         err => {
           log(`\n    ${cliName} · Generated "${projectName}".\n`)
