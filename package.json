@@ -6,7 +6,8 @@
   "author": "justemit",
   "templates": [
     "react-typescript-boilerplate",
-    "electron-react-boilerplate"
+    "electron-react-boilerplate",
+    "vue-ssr-boilerplate"
   ],
   "license": "ISC",
   "private": true,
