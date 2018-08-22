@@ -29,3 +29,5 @@ Current available templates include:
 - [electron-react-boilerplate](https://github.com/justemit/electron-react-boilerplate) - A boilerplate for developing Electron App with React and TypeScript
 
 - [react-typescript-boilerplate](https://github.com/justemit/react-typescript-boilerplate) - A boilerplate for developing React App with TypeScript
+
+- [vue-ssr-boilerplate](https://github.com/justemit/vue-ssr-boilerplate) - A boilerplate for developing Server Side Render Vue.js Application
