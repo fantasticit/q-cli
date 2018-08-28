@@ -1,33 +1,51 @@
-# hy-cli
+# q-cli
 
-> A simple CLI for scaffolding project via template.
+> [English](./README_EN.md)
 
-## Install
+### 使用 **远程模板项目** 创建新的项目 脚手架
 
-As this CLI project is private,we can use `npm link` to install this CLI.
+## 使用方法
+
+进入本项目根目录，执行 `npm link`，即可全局安装本脚手架。
+
+在命令行输入 `q-cli -h` 即可查看所有的命令说明。
+
+## 添加模板
+
+命令行键入 `q-cli config --all`，即可查看所有配置。请参照 `q-cli config templates` 的结构加入模板。
+
+例如，假设 `q-cli` 的配置文件中暂无任何模板，同时我想添加 github 上的模板，过程如下：
 
 ```shell
-git clone git@github.com:justemit/hy-cli.git
-cd hy-cli
-npm link
+q-cli config templates [] # config.tempaltes = []
+q-cli config templates.0 {} # config.templates[0] = {}
+q-cli config templates.0.rootURL justemit # config.templates[0].rootURL = "justemit"
+q-cli config templates.0.templates [] # config.templates[0].templates = []
+q-cli config templates.0.templates.0 vue-ssr-boilerplate # config.templates[0].templates[0] = "vue-ssr-boilerplate"
 ```
 
-Now,`hy-cli` is installed as a global command.
+执行 `q-cli list`，命令行输出应为：
 
-## Usage
+```shell
+  1. justemit/vue-ssr-boilerplate
+```
 
-`$ hy-cli init <project-name>`
+## 注意
 
-Example:
+如果使用私有 gitlab 的模板项目必须设置 `clone: true`，同时下载地址的形式应为：
 
-`$ hy-cli init my-project`
+```shell
+git.yourdomain.com:group/projectname
+```
 
-## Boilerplates
+例如：
 
-Current available templates include:
-
-- [electron-react-boilerplate](https://github.com/justemit/electron-react-boilerplate) - A boilerplate for developing Electron App with React and TypeScript
-
-- [react-typescript-boilerplate](https://github.com/justemit/react-typescript-boilerplate) - A boilerplate for developing React App with TypeScript
-
-- [vue-ssr-boilerplate](https://github.com/justemit/vue-ssr-boilerplate) - A boilerplate for developing Server Side Render Vue.js Application
+```json
+{
+  "rootURL": "your-gitlab-domain.com:your-gitlab-group",
+  "templates": ["repo"],
+  "options": {
+    "clone": true
+  }
+}
+```

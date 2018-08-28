@@ -1,0 +1,12 @@
+{
+  "templates": [
+    {
+      "rootURL": "justemit",
+      "templates": [
+        "vue-ssr-boilerplate",
+        "react-typescript-boilerplate",
+        "electron-react-boilerplate"
+      ]
+    }
+  ]
+}

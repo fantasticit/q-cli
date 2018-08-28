@@ -1,34 +1,19 @@
 {
-  "name": "hy-cli",
-  "version": "0.0.2",
-  "description": "A cli tool to init project from github project template",
+  "name": "q-cli",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "justemit",
-  "templates": [
-    "react-typescript-boilerplate",
-    "electron-react-boilerplate",
-    "vue-ssr-boilerplate"
-  ],
-  "license": "ISC",
-  "private": true,
+  "license": "MIT",
   "bin": {
-    "hy-cli": "./bin/index.js"
-  },
-  "keywords": [
-    "node-cli",
-    "react template",
-    "electron template"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/justemit/hy-cli.git"
+    "q-cli": "./src/index.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "commander": "^2.15.1",
-    "download-git-repo": "^1.0.2",
-    "inquirer": "^6.0.0",
-    "ora": "^2.1.0",
-    "rimraf": "^2.6.2"
+    "commander": "^2.17.1",
+    "download-git-repo": "^1.1.0",
+    "fs-extra": "^7.0.0",
+    "inquirer": "^6.2.0",
+    "log-symbols": "^2.2.0",
+    "ora": "^3.0.0"
   }
 }
