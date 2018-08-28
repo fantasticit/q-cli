@@ -4,7 +4,12 @@ const path = require('path')
 const download = require('download-git-repo')
 const packageJSON = require('./packageJSON')
 
-module.exports = async function fetchRemotePreset(name, template, clone) {
+module.exports = async function fetchRemotePreset(
+  name,
+  template,
+  clone,
+  subdir = undefined
+) {
   const tmpdir = path.join(os.tmpdir(), packageJSON.name)
 
   // clone will fail if tmpdir already exists
@@ -21,7 +26,18 @@ module.exports = async function fetchRemotePreset(name, template, clone) {
     })
   })
 
-  // 从临时文件夹 copy 文件到 目标路径
+  let isSubdirExist = false
   const targetPath = path.resolve(process.cwd(), `./${name}/`)
-  return await fs.copy(tmpdir, targetPath)
+
+  if (subdir) {
+    subdir = path.resolve(tmpdir, './', subdir)
+    isSubdirExist = fs.existsSync(subdir)
+  }
+
+  // 从临时文件夹 copy 文件到 目标路径
+  if (isSubdirExist) {
+    return await fs.copy(subdir, targetPath)
+  } else {
+    return await fs.copy(tmpdir, targetPath)
+  }
 }

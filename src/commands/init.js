@@ -22,10 +22,10 @@ async function selectTemplate() {
 }
 
 program
-  .command('init <name>')
+  .command('init <name> [subdir]')
   .description('generate a project from a remote template')
   .option('-c --clone', 'Use git clone when fetching remote template')
-  .action(async (name, command) => {
+  .action(async (name, subdir, command) => {
     const template = await selectTemplate()
     const clone = templatesObj[template].clone || Boolean(command.clone)
 
@@ -33,7 +33,7 @@ program
     spinner.start()
 
     try {
-      await download(name, template, clone)
+      await download(name, template, clone, subdir)
       spinner.stop()
 
       console.log()
